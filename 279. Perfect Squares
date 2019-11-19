@@ -1,0 +1,60 @@
+class Solution {
+public:
+    int numSquares(int n) {
+//         vector<int> sq;
+//         int i=1;
+//         while(i*i<=n){
+//             sq.push_back(i*i);
+//             i++;
+//         }
+        
+//         vector<vector<int>> dp(sq.size(), vector<int>(n+2,0));
+        
+//         for(int i=0;i<=n;i++)
+//             dp[0][i]=i;
+        
+//         for(int i=1;i<sq.size();i++){
+//             for(int j=1;j<=n;j++){
+//                 if(j<sq[i])
+//                     dp[i][j] = dp[i-1][j];
+//                 else
+//                     dp[i][j] = min(dp[i-1][j],dp[i][j-sq[i]]+1);
+//             }
+//         }
+//         return dp[sq.size()-1][n];
+        
+        //Lagrange's four-square theorem
+        //Every natural number can be represented as the sum of four integer squares.
+        // so only possible answer can be 1,2,3,4
+        
+        //Case 1: Possible answer 1, for all the perfect squares
+        if(is_square(n))
+            return 1;
+        
+        //Case 2: Possible answer 4
+        //Legendre's theorem states that a num can be represented as sum of three integer squares if and only if number can not be written in the form, n = 4^k(8^m+7). 
+        //so find whether the element satisfy this equation, if yes than element can only be written with sum of 4 square numbers.
+        while(n%4==0)
+            n >>=2;
+        if(n%8==7)
+            return 4;
+        
+        
+        //Case 3: Possible answer 2
+        //Find two numbers whose sum of squares will be equal to given number.
+        int sqrt_root = (int)sqrt(n);
+        for(int i=1;i<=sqrt_root;i++){
+            if(is_square(n-i*i))
+                return 2;
+        }
+        //Case 4: Answer 3
+        //If none of the above three case satisfy then return 3
+        return 3;
+        
+    }
+    
+    bool is_square(int num){
+        int sqr_root = (int)sqrt(num);
+        return (sqr_root*sqr_root == num);
+    }
+};
