@@ -39,7 +39,6 @@ public:
         if(n%8==7)
             return 4;
         
-        
         //Case 3: Possible answer 2
         //Find two numbers whose sum of squares will be equal to given number.
         int sqrt_root = (int)sqrt(n);
