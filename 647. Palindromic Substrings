@@ -1,0 +1,23 @@
+class Solution {
+public:
+    int count=0;
+    int countSubstrings(string s) {
+        if(s.length()==0)
+            return count;
+        
+        for(int i=0;i<s.length();i++){
+            backtrack(s,i,i); //for even length palindrom
+            backtrack(s,i,i+1); //for odd length palindrom
+            
+        }
+        return count;
+    }
+    void backtrack(string s, int i, int j){
+        //Expand from current position to both sides of the string
+        while(i>=0 && j<s.length() && s[i]==s[j]){
+            count++;
+            i--;
+            j++;
+        }
+    }
+};
