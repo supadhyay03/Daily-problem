@@ -1,0 +1,45 @@
+class Solution {
+public:
+    vector<string> result;
+    vector<string> generateParenthesis(int n) {
+        backtrack(result,"",0,0,n);
+        return result;
+    }
+    
+    void backtrack(vector<string> &result, string curr, int open, int close, int n){
+        if(curr.length()==n*2){
+            result.push_back(curr);
+            return;
+        }
+        
+        if(open<n)
+            backtrack(result,curr+"(", open+1,close,n);
+        if(close<open)
+            backtrack(result,curr+")",open,close+1,n);
+        
+    }
+};
+
+/* For n=3
+(
+((
+(((
+((()
+((())
+((()))
+(()
+(()(
+(()()
+(()())
+(())
+(())(
+(())()
+()
+()(
+()((
+()(()
+()(())
+()()
+()()(
+()()()
+*/
