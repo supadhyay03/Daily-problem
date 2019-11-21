@@ -1,0 +1,50 @@
+class Solution {
+public:
+    
+//     vector<vector<int>> permute(vector<int>& nums) {
+//         vector<vector<int>> result;
+//         backtrack(nums,0,result);
+//         return result;
+//     }
+//     void backtrack(vector<int>& nums, int pos, vector<vector<int>>& result){
+//         if(pos>=nums.size()){
+//             result.push_back(nums);
+//             return;
+//         }
+            
+//         for(int i=pos;i<nums.size();i++){
+//             swap(nums[pos],nums[i]);
+//             backtrack(nums,pos+1,result);
+//             swap(nums[pos],nums[i]);
+//         }
+//     }
+    
+    vector<vector<int>> permute(vector<int>& nums) {
+        vector<vector<int>> result;
+        sort(nums.begin(),nums.end());
+        result.push_back(nums);
+        while(find_next_permutation(result,nums)){}
+        return result;
+        
+    }
+    
+    int find_next_permutation(vector<vector<int>> &result, vector<int>& nums){
+        int k, l;
+        for(k=nums.size()-2;k>=0;k--){
+            if(nums[k]<nums[k+1])
+               break;
+        }
+        if(k<0){
+            return 0;
+        }
+        
+        for(l=nums.size()-1;l>k;l--){
+            if(nums[k]<nums[l])
+                break;
+        }
+        swap(nums[k],nums[l]);
+        reverse(nums.begin()+k+1,nums.end());
+        result.push_back(nums);
+        return 1;
+    }
+};
