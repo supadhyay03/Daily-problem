@@ -1,0 +1,37 @@
+#include <iostream>
+#include<vector>
+using namespace std;
+
+void print_result(vector<bool> v){
+	for(int i=0;i<v.size();i++)
+		cout<<v[i]<<" ";
+	cout<<"\n";
+}
+
+void backtrack(vector<bool> input,int curr){
+	if(curr == input.size()){
+		print_result(input);
+		return;
+	}
+	
+	backtrack(input,curr+1);
+
+  //Check if 1 is in previout position.
+	if(curr>0 && input[curr-1]==1)
+		return;
+	input[curr]=1;
+	backtrack(input,curr+1);
+
+	return;
+}
+
+
+
+int main(){
+	int n=3;
+	
+	vector<bool> input(n,0);
+	
+	backtrack(input,0);
+	return 0;
+}
